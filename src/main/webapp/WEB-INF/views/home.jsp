@@ -19,21 +19,6 @@
   	<input type="submit" value="검색">
 </form>
 
-<table border="0">
-	<tr>
-		<td>type</td>
-		<td>${type}</td>
-	</tr>
-	<tr>
-		<td>version</td>
-		<td>${version}</td>
-	</tr>
-	
-	
-	
-	
-	
-</table>
 
 
 

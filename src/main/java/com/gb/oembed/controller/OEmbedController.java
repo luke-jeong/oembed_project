@@ -36,9 +36,17 @@ public class OEmbedController {
 		  
 		  if(tempUrl.contains("www.youtube.com")) {
 			  List<OembedResponse> oembedResponse = service.getOembedResponses(tempUrl);
-			  modelMap.addAttribute(oembedResponse);
+			  
+			  String type = "";
+			  String version;
+
+			  for(OembedResponse o : oembedResponse) {
+				  type = o.getType();				  
+			  }
+			  
+			  modelMap.addAttribute("type",type);
 			  modelMap.addAttribute("url",tempUrl);
-			  mv = new ModelAndView("home",modelMap);
+			  mv = new ModelAndView("result",modelMap);
 		  }
 
 		  
