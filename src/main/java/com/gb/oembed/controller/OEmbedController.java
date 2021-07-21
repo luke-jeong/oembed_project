@@ -50,6 +50,7 @@ public class OEmbedController {
 		  String tUrl = "";
 			if(url.contains("www.youtube.com")) {
 				tUrl = "https://www.youtube.com/oembed?url="+url+ "&format=json";
+				
 			}else if(url.contains("www.instagram.com")){
 				tUrl = "https://api.instagram.com/oembed?url="+url+ "&format=json";
 			}else if(url.contains("twitter.com")){
@@ -57,7 +58,7 @@ public class OEmbedController {
 			}else if(url.contains("vimeo.com")){
 				tUrl = "https://vimeo.com/api/oembed.json?url="+url+ "&format=json";
 			}
-
+			List<OembedResponse> oembedResponse = service.getOembedResponses(tUrl);
 			  modelMap.addAttribute("url",url);
 			  
 			  mv = new ModelAndView("result",modelMap);

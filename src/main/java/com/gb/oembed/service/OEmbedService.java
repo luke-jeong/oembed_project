@@ -17,7 +17,7 @@ import com.gb.oembed.model.Ores;
 public class OEmbedService {
 	public List<OembedResponse> getOembedResponses(String url){
 		String json = "";
-		OembedResponse root = null;
+		Ores root = null;
 		try {
 			URL url_result = new URL(url);
 			
@@ -35,14 +35,14 @@ public class OEmbedService {
 	         ObjectMapper mapper = new ObjectMapper();
 	         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // java 오브젝트에 없는 프로퍼티로 생기는 오류 발생하지 않도록 설정
 	     	  
-	         root = mapper.readValue(json, OembedResponse.class); 
+	         root = mapper.readValue(json, Ores.class); 
 	         
 	         System.out.println(root);
 	     
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
-	      return root.get;
+	      return root.getOres();
 		
 	
 	}
