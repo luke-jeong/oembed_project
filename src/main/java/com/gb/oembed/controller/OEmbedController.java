@@ -27,28 +27,40 @@ public class OEmbedController {
       
 	  @GetMapping(value = "/url_search")	  
 	  @ResponseBody
-	  public ModelAndView oembed_url(String url) throws ParseException{
+	  public ModelAndView oembed_url(String url){
 		  
 		  ModelAndView mv = null;
 		  ModelMap modelMap = new ModelMap();
 	  
-		  String tempUrl = url;
-		  
-		  if(tempUrl.contains("www.youtube.com")) {
-			  List<OembedResponse> oembedResponse = service.getOembedResponses(tempUrl);
-			  
-			  String type = "";
-			  String version;
+			
+			/*
+			 * String tUrl = url;
+			 * 
+			 * if(tUrl.contains("www.youtube.com")) { List<OembedResponse> oembedResponse =
+			 * service.getOembedResponses(tUrl);
+			 * 
+			 * String type = ""; String version;
+			 * 
+			 * for(OembedResponse o : oembedResponse) { type = o.getType(); }
+			 * 
+			 * modelMap.addAttribute("type",type); modelMap.addAttribute("url",tUrl); mv =
+			 * new ModelAndView("result",modelMap); }
+			 * 
+			 */
+		  String tUrl = "";
+			if(url.contains("www.youtube.com")) {
+				tUrl = "https://www.youtube.com/oembed?url="+url+ "&format=json";
+			}else if(url.contains("www.instagram.com")){
+				tUrl = "https://api.instagram.com/oembed?url="+url+ "&format=json";
+			}else if(url.contains("twitter.com")){
+				tUrl = "https://publish.twitter.com/oembed?url="+url+ "&format=json";
+			}else if(url.contains("vimeo.com")){
+				tUrl = "https://vimeo.com/api/oembed.json?url="+url+ "&format=json";
+			}
 
-			  for(OembedResponse o : oembedResponse) {
-				  type = o.getType();				  
-			  }
+			  modelMap.addAttribute("url",url);
 			  
-			  modelMap.addAttribute("type",type);
-			  modelMap.addAttribute("url",tempUrl);
 			  mv = new ModelAndView("result",modelMap);
-		  }
-
 		  
 		  return mv;
 	  }

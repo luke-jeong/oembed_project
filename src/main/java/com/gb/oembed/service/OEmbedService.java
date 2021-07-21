@@ -17,9 +17,9 @@ import com.gb.oembed.model.Ores;
 public class OEmbedService {
 	public List<OembedResponse> getOembedResponses(String url){
 		String json = "";
-		Ores root = null;
+		OembedResponse root = null;
 		try {
-			URL url_result = new URL("https://www.youtube.com/oembed?url=" + url + "&format=json");
+			URL url_result = new URL(url);
 			
 			 BufferedReader bf;
 	         String r = "";
@@ -29,17 +29,20 @@ public class OEmbedService {
 
 	            json = json.concat(r);
 	         }
-
+	         System.out.println(json);
+	         
+	         
 	         ObjectMapper mapper = new ObjectMapper();
 	         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // java 오브젝트에 없는 프로퍼티로 생기는 오류 발생하지 않도록 설정
-	     
-	         JsonNode node = mapper.readTree(json);
-	         root = mapper.readValue(node.findValue("ores").toString(), Ores.class);                  
+	     	  
+	         root = mapper.readValue(json, OembedResponse.class); 
+	         
+	         System.out.println(root);
 	     
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      }
-	      return root.getOres();
+	      return root.get;
 		
 	
 	}
